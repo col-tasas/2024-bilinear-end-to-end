@@ -37,7 +37,7 @@ The code uses the YALMIB toolbox with the solver MOSEK.
 
 
 [license-shield]: https://img.shields.io/badge/License-MIT-T?style=flat&color=blue
-[license-url]: https://github.com/col-tasas/2024-bounds-finite-set-ID/blob/main/LICENSE
+[license-url]: https://github.com/col-tasas/2024-bilinear-end-to-end/blob/main/LICENSE
 [webpage-shield-NC]: https://img.shields.io/badge/Webpage-Nicolas%20Chatzikiriakos-T?style=flat&logo=codementor&color=green
 [webpage-url-NC]: https://www.ist.uni-stuttgart.de/institute/team/Chatzikiriakos/
 [webpage-shield-RS]: https://img.shields.io/badge/Webpage-Robin%20Strässer-T?style=flat&logo=codementor&color=green
