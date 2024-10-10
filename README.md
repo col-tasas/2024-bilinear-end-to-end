@@ -25,13 +25,14 @@ To install all relevant packages execute
 pip install -r requirements.txt
 ```
 #### LSE and error bound estimates
-- To recreate Fig.1 a)&b) run main.py once and plot data using plotError_T.m.
-- To recreate Fig.1 c)&d) run main.py with different system dimensions and plot data using plotError_nx.m.
+- To recreate Fig.1 a)&b) run main.py inside AnalysisBounds directory once and plot data using plotError_T.m.
+- To recreate Fig.1 c)&d) run main.py inside AnalysisBounds directory with different system dimensions and plot data using plotError_nx.m.
+  - Name strings in plotError_nx.m need to be adjusted based on the choices in main.py, i.e., to resemble the ones in the data directory
 
 ### Controller design  
 The controller design is carried out in matlab. Each of the exmaples has its own main.m, indicated by the suffix.
 #### Requirements 
-The code uses the YALMIB toolbox with the solver MOSEK.
+The code uses the YALMIB toolbox with the solver MOSEK, and the Statistics and Machine Learning Toolbox.
 ## Contact
 🧑‍💻 Nicolas Chatzikiriakos - [nicolas.chatzikiriakos@ist.uni-stuttgart.de](mailto:nicolas.chatzikiriakos@ist.uni-stuttgart.de)
 
