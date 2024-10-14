@@ -42,7 +42,7 @@ The code uses the YALMIB toolbox with the solver MOSEK, and the Statistics and M
 [license-shield]: https://img.shields.io/badge/License-MIT-T?style=flat&color=blue
 [license-url]: https://github.com/col-tasas/2024-bilinear-end-to-end/blob/main/LICENSE
 [webpage-shield-NC]: https://img.shields.io/badge/Webpage-Nicolas%20Chatzikiriakos-T?style=flat&logo=codementor&color=green
-[webpage-url-NC]: https://www.ist.uni-stuttgart.de/institute/team/Chatzikiriakos/
+[webpage-url-NC]: https://nchatzikiriakos.github.io
 [webpage-shield-RS]: https://img.shields.io/badge/Webpage-Robin%20Strässer-T?style=flat&logo=codementor&color=green
 [webpage-url-RS]: https://www.ist.uni-stuttgart.de/institute/team/Straesser/
 [arxiv-shield]: https://img.shields.io/badge/arXiv-2409.18010-t?style=flat&logo=arxiv&logoColor=white&color=red
