@@ -1,5 +1,5 @@
-function [K,Kw,Pinv,sys,compTime] = controllerDesign(sys,eps,param)
-%% Function to design a (robust) controller for bilinear systems
+function [K,Kw,Pinv,compTime] = controllerDesign_LMI(sys,eps,param)
+%% Function to design a controller for a discrete-time bilinear system
 % Inputs: 
 %   - sys: Bilinear system description
 %   - eps: small margin to ensure positive definiteness
@@ -9,24 +9,21 @@ function [K,Kw,Pinv,sys,compTime] = controllerDesign(sys,eps,param)
 %   - K: (n_u x n_u) controller gain (numerator)
 %   - Kw: (n_x x n_x) controller gain (denominator)
 %   - Pinv: (n_x x n_x)-dimensional Lyapunov matrix 
-%   - sys: Bilinear system description
 %   - compTime: computation time of the controller design
 %
 % __author__ = "Robin Straesser"
 % __contact__ = "robin.straesser@ist.uni-stuttgart.de"
-% __date__ = "2024/10/01"
+% __date__ = "2025/04/24"
 
-fprintf('Design a stabilizing controller...')
 % Optimization: Decision variables
 lmis = [];
     % (Inverse) Lyapunov matrix
     P = sdpvar(sys.n_x,sys.n_x,'symmetric');
-    lmis = [lmis,P >= eps.P*eye(sys.n_x)];
+    lmis = [lmis,P-eps.P*eye(size(P))>=0];
     % State-feedback gain
     L = sdpvar(sys.n_u,sys.n_x,'full');
     % Full-information feedback gain
     Lw = sdpvar(sys.n_u,sys.n_u*sys.n_x,'full');
-%     Lw = zeros(sys.n_u,sys.n_u*sys.n_x);
 
     % multiplier bilinearity
     Piinv = inv([sys.Pi.Qz,sys.Pi.Sz;sys.Pi.Sz',sys.Pi.Rz]);
@@ -72,7 +69,7 @@ lmis = [];
     
     lmis = [lmis,F - eps.F*eye(size(F)) >= 0];
     
-    % invariance of safe operating region
+    % invariance of region of attraction
     nu = sdpvar(1);
     lmis = [lmis,nu >= eps.nu];
     FI11 = nu*tRz - 1;
@@ -84,14 +81,14 @@ lmis = [];
     
     % Solve optimization
     cost = -trace(P);
-    opt = optimize(lmis,cost,sdpsettings('solver','mosek'));
+    [~,opt] = evalc("optimize(lmis,cost,sdpsettings('solver','mosek'))");
 
     compTime = opt.solvertime;
     switch opt.problem 
         case -1
             error('Controller design was not successful for Rz=%.2g and T_samples=%i: %s: ILL_POSED',sys.Pi.Rz,param.T_samples,opt.info)
         case 0 
-            fprintf('Controller design completed. %s: PRIMAL_AND_DUAL_FEASIBLE\n', opt.info)
+            fprintf('Controller design completed for Rz=%.2g and T_samples=%i: %s: PRIMAL_AND_DUAL_FEASIBLE\n',sys.Pi.Rz,param.T_samples,opt.info)
             % Store obtained decision variables
             P = double(P);
             Pinv = P \ eye(sys.n_x);

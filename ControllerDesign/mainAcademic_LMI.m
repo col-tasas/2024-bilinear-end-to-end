@@ -1,4 +1,4 @@
-%% Script for example 1: Bilinear academic example 
+%% Script for example 1: Bilinear academic example -- LMI approach
 % Inputs: 
 %   - none 
 %
@@ -8,7 +8,7 @@
 %
 % __author__ = "Robin Straesser"
 % __contact__ = "robin.straesser@ist.uni-stuttgart.de"
-% __date__ = "2024/10/01"
+% __date__ = "2025/04/24"
 
 clear;clc;clearvars;
 % Set MATLAB figure style
@@ -28,7 +28,7 @@ sys.dynamics = @(x,u) sys.A*x + sys.B0*u + sys.Aux*kron(u,x);
 [sys.n_x,sys.n_u] = size(sys.B0); % state and input dimension
 
 %% data properties
-param.sigma_x = [1;1]; 
+param.sigma_x = 1; 
 param.stdNoise = 0.1; 
 param.delta = 0.05;
 param.umax = 2; param.umin = -2;
@@ -36,27 +36,30 @@ param.umax = 2; param.umin = -2;
 %% Compute RoA for different combinations of bounds and Rz
 Rz = 0.1; 
 param.boundType='dataIndividual'; param.T_samples=360;
-data1 = estimateRoA(Rz,sys,param);
+[data1,~,~,~,~,compTime1] = indirectDataDrivenControl_LMI(sys,param,Rz);
 param.boundType='dataEllipsoidal'; param.T_samples=360;
-data2 = estimateRoA(Rz,sys,param); 
+[data2,~,~,~,~,compTime2] = indirectDataDrivenControl_LMI(sys,param,Rz); 
 param.boundType='dataEllipsoidal'; param.T_samples=33; 
-data3 = estimateRoA(Rz,sys,param);
+[data3,~,~,~,~,compTime3] = indirectDataDrivenControl_LMI(sys,param,Rz);
+fprintf('Average computation time for Rz=%.1f: %.4f\n\n',Rz,(compTime1+compTime2+compTime3)/2)
 
 Rz = 0.6; 
 param.boundType='dataIndividual'; param.T_samples=2263;
-data4 = estimateRoA(Rz,sys,param);
+[data4,~,~,~,~,compTime4] = indirectDataDrivenControl_LMI(sys,param,Rz);
 param.boundType='dataEllipsoidal'; param.T_samples=2263;
-data5 = estimateRoA(Rz,sys,param);
+[data5,~,~,~,~,compTime5] = indirectDataDrivenControl_LMI(sys,param,Rz);
 param.boundType='dataEllipsoidal'; param.T_samples=213; 
-data6 = estimateRoA(Rz,sys,param);
-  
+[data6,~,~,~,~,compTime6] = indirectDataDrivenControl_LMI(sys,param,Rz);
+fprintf('Average computation time for Rz=%.1f: %.4f\n\n',Rz,(compTime4+compTime5+compTime6)/2)
+
 Rz = 0.9; 
 param.boundType='dataIndividual'; param.T_samples=34668;
-data7 = estimateRoA(Rz,sys,param);
+[data7,~,~,~,~,compTime7] = indirectDataDrivenControl_LMI(sys,param,Rz);
 param.boundType='dataEllipsoidal'; param.T_samples=34668;
-data8 = estimateRoA(Rz,sys,param);
+[data8,~,~,~,~,compTime8] = indirectDataDrivenControl_LMI(sys,param,Rz);
 param.boundType='dataEllipsoidal'; param.T_samples=3999;
-data9 = estimateRoA(Rz,sys,param);
+[data9,~,~,~,~,compTime9] = indirectDataDrivenControl_LMI(sys,param,Rz);
+fprintf('Average computation time for Rz=%.1f: %.4f\n',Rz,(compTime7+compTime8+compTime9)/2)
 
 %% Plotting
 figure(1);clf;hold all;grid on;

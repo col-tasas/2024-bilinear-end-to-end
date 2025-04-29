@@ -10,7 +10,7 @@ function QzHeuristics = computeHeuristicX(sys,eps,param)
 %
 % __author__ = "Robin Straesser"
 % __contact__ = "robin.straesser@ist.uni-stuttgart.de"
-% __date__ = "2024/10/01"
+% __date__ = "2025/04/24"
 
 
 

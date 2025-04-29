@@ -1,4 +1,4 @@
-%% Script for example 3: Nonlinear inverted pendulum 
+%% Script for example 2: Nonlinear inverted pendulum -- LMI approach
 % Inputs: 
 %   - none 
 %
@@ -8,7 +8,7 @@
 %
 % __author__ = "Robin Straesser"
 % __contact__ = "robin.straesser@ist.uni-stuttgart.de"
-% __date__ = "2024/10/01"
+% __date__ = "2025/04/24"
 
 clear;clc;clearvars;
 % Set MATLAB figure style
@@ -30,17 +30,18 @@ sys.n_x = 2; sys.n_u = 1;
 sys.lifting = @(z) [z; sin(z(1))];
 
 %% data properties
-param.sigma_x = [1;1]; 
+param.sigma_x = 1; 
 param.stdNoise = 1e-3; 
 param.delta = 0.05;
 param.umax = 2; param.umin = -2;
 param.Qz = 'eye';
+%
 param.overapproxQDelta = true;
 
 %% Compute RoA and controller gains
 Rz = 11;  
 param.boundType='dataEllipsoidal'; param.T_samples = 50000;
-[~,K,Kw,Pinv,sys] = estimateRoA(Rz,sys,param);
+[~,K,Kw,Pinv,sys] = indirectDataDrivenControl_LMI(sys,param,Rz);
 
 %% Plotting
 fprintf('Plotting...')

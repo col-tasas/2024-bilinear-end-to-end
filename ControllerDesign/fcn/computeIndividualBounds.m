@@ -14,7 +14,7 @@ function [eps] = computeIndividualBounds(sys, X, Y, T_samples, delta, stdNoise)
 
 % __author__ = "Nicolas Chatzikiriakos"
 % __contact__ = "nicolas.chatzikiriakos@ist.uni-stuttgart.de"
-% __date__ = "2024/10/01"
+% __date__ = "2025/04/24"
 
 
 %% Check burn-in time 

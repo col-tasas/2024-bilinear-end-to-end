@@ -4,7 +4,7 @@ function [X, Xp, Y, Yp, sys] = generateData(sys, T_samples, sigma_z, sigma_w)
 %   - sys: Bilinear system description
 %   - T_samples: (sys.n_u+1 x 1) number of samples generated for each of the
 %   linear simulations
-%   - sigma_x, sigma_w (sys.n_x x 1), variance of each state/noise entry 
+%   - sigma_z, sigma_w (sys.n_x x 1), variance of each state/noise entry 
 %
 % Outputs: 
 %   - X: data matrix (states) for xp = Ax + w
@@ -15,7 +15,7 @@ function [X, Xp, Y, Yp, sys] = generateData(sys, T_samples, sigma_z, sigma_w)
 %
 % __author__ = "Nicolas Chatzikiriakos"
 % __contact__ = "nicolas.chatzikiriakos@ist.uni-stuttgart.de"
-% __date__ = "2024/10/01"
+% __date__ = "2025/04/24"
 
 rng('default')
 

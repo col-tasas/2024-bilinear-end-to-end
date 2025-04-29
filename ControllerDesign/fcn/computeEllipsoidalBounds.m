@@ -14,7 +14,7 @@ function [epsEll] = computeEllipsoidalBounds(sys, X, Y, T_samples, delta, stdNoi
 %
 % __author__ = "Nicolas Chatzikiriakos"
 % __contact__ = "nicolas.chatzikiriakos@ist.uni-stuttgart.de"
-% __date__ = "2024/10/01"
+% __date__ = "2025/04/24"
 
 
 %% Check burn-in time
@@ -34,12 +34,12 @@ end
 epsEll = cell(sys.n_u+1, 1);
 
 % Identification of A
-M = (X' * X);
+M = X' * X;
 epsEll{1} = stdNoise^2 * (2 * sqrt(sys.n_x) + sqrt(2 * log(1/delta)))^2 * (eye(size(M)) / M);
 
 % Identification of B_i, [B_0]_i
 for i=1:1:sys.n_u
-    M = (Y{i}(:,:)' * Y{i}(:,:));
+    M = Y{i}(:,:)' * Y{i}(:,:);
     epsEll{i+1} = stdNoise^2 * (sqrt(sys.n_x+1)+ sqrt(sys.n_x) + sqrt(2 * log(1/delta)))^2 * (eye(size(M)) / M);
 end
 
