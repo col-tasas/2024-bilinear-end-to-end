@@ -30,7 +30,7 @@ pip install -r requirements.txt
   - Name strings in plotError_nx.m need to be adjusted based on the choices in main.py, i.e., to resemble the ones in the data directory
 
 ### Controller design  
-The controller design is carried out in matlab. Each of the exmaples has its own main.m, indicated by the suffix.
+The controller design is carried out in matlab. Each of the examples has its own main.m, indicated by the suffix.
 #### Requirements 
 The code uses the YALMIB toolbox with the solver MOSEK, and the Statistics and Machine Learning Toolbox.
 ## Contact
